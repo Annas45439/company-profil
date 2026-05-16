@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue, animate } f
 import { Mail, Phone, MapPin, ArrowDown } from 'lucide-react';
 import TextScrollReveal from './ScrollReveal';
 import PillNav from './PillNav';
+import BubbleMenu from './BubbleMenu';
 import Lightning from './Lightning';
 import Shuffle from './Shuffle';
 import SpotlightCard from './SpotlightCard';
@@ -379,25 +380,43 @@ const Navbar = ({ theme, onToggleTheme }) => {
     };
   }, []);
 
+  const bubbleItems = NAV_ITEMS.map(item => ({
+    ...item,
+    ariaLabel: item.label,
+  }));
+
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none pt-3">
-      <div className="pointer-events-auto">
-        <PillNav
-          logo="/telavi-logo.svg"
-          logoAlt={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          items={items}
-          activeHref={activeHref}
-          onLogoClick={onToggleTheme}
-          className="custom-nav"
-          ease="power2.easeOut"
-          baseColor={theme === 'dark' ? 'rgba(10,16,40,0.68)' : 'rgba(255,255,255,0.68)'}
-          pillColor={theme === 'dark' ? 'rgba(125,145,255,0.14)' : 'rgba(255,255,255,0.56)'}
-          hoveredPillTextColor="#FAF5EE"
-          pillTextColor={theme === 'dark' ? '#F5F7FF' : '#18233f'}
-          initialLoadAnimation={false}
-        />
+    <>
+      {/* Desktop nav — PillNav */}
+      <div className="fixed top-0 left-0 right-0 z-50 justify-center pointer-events-none pt-3 hidden md:flex">
+        <div className="pointer-events-auto">
+          <PillNav
+            logo="/telavi-logo.svg"
+            logoAlt={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            items={items}
+            activeHref={activeHref}
+            onLogoClick={onToggleTheme}
+            className="custom-nav"
+            ease="power2.easeOut"
+            baseColor={theme === 'dark' ? 'rgba(10,16,40,0.68)' : 'rgba(255,255,255,0.68)'}
+            pillColor={theme === 'dark' ? 'rgba(125,145,255,0.14)' : 'rgba(255,255,255,0.56)'}
+            hoveredPillTextColor="#FAF5EE"
+            pillTextColor={theme === 'dark' ? '#F5F7FF' : '#18233f'}
+            initialLoadAnimation={false}
+          />
+        </div>
       </div>
-    </div>
+
+      {/* Mobile nav — BubbleMenu */}
+      <BubbleMenu
+        logo="/telavi-logo.svg"
+        items={bubbleItems}
+        menuAriaLabel="Toggle navigation"
+        animationEase="back.out(1.4)"
+        animationDuration={0.4}
+        staggerDelay={0.08}
+      />
+    </>
   );
 };
 

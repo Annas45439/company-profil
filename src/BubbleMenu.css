@@ -1,0 +1,170 @@
+/* ===================================
+   BubbleMenu — TELAVI Theme (Mobile Only)
+   =================================== */
+
+/* Nav bar */
+.bm-nav {
+  display: none; /* hidden by default, shown on mobile */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .bm-nav {
+    display: flex;
+  }
+}
+
+/* Base bubble */
+.bm-bubble {
+  --size: 46px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  background: rgba(18, 12, 28, 0.85);
+  border: 1px solid rgba(200, 150, 42, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.07);
+}
+
+/* Logo bubble — pill shape */
+.bm-logo {
+  width: auto;
+  padding: 0 14px;
+  border-radius: 999px;
+  gap: 8px;
+}
+
+.bm-logo-img {
+  max-height: 26px;
+  max-width: 90px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Toggle button */
+.bm-toggle {
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bm-line {
+  width: 20px;
+  height: 1.5px;
+  background: rgba(200, 150, 42, 0.9);
+  border-radius: 2px;
+  display: block;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  transform-origin: center;
+}
+
+.bm-line.short { width: 14px; }
+
+.bm-toggle.open .bm-line:first-child {
+  transform: translateY(3.25px) rotate(45deg);
+  width: 20px;
+}
+.bm-toggle.open .bm-line.short {
+  transform: translateY(-3.25px) rotate(-45deg);
+  width: 20px;
+}
+
+/* === Overlay === */
+.bm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 6, 18, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+
+/* Grid of pills */
+.bm-list {
+  list-style: none;
+  margin: 0;
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  pointer-events: auto;
+  justify-content: center;
+}
+
+.bm-col {
+  flex: 0 0 calc(50% - 6px);
+  display: flex;
+  justify-content: center;
+}
+
+/* Last item (odd number) takes full row */
+.bm-col:last-child:nth-child(odd) {
+  flex: 0 0 100%;
+}
+
+/* Pill button */
+.bm-pill {
+  width: 100%;
+  min-height: 80px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(245, 238, 225, 0.85);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow: hidden;
+  position: relative;
+}
+
+.bm-pill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(200,150,42,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.bm-pill:hover,
+.bm-pill:active {
+  background: rgba(200, 150, 42, 0.12);
+  border-color: rgba(200, 150, 42, 0.3);
+  color: #C8962A;
+  transform: scale(1.04);
+}
+
+/* Label text */
+.bm-label {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: inline-block;
+  will-change: transform, opacity;
+  font-family: sans-serif;
+}
