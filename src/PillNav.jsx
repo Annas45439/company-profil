@@ -90,7 +90,7 @@ const PillNav = ({
 
     const menu = mobileMenuRef.current;
     if (menu) {
-      gsap.set(menu, { visibility: 'hidden', opacity: 0, scaleY: 1 });
+      gsap.set(menu, { visibility: 'hidden', opacity: 0, x: '100%' });
     }
 
     if (initialLoadAnimation) {
@@ -182,24 +182,20 @@ const PillNav = ({
         gsap.set(menu, { visibility: 'visible' });
         gsap.fromTo(
           menu,
-          { opacity: 0, y: 10, scaleY: 1 },
+          { opacity: 0, x: '100%' },
           {
             opacity: 1,
-            y: 0,
-            scaleY: 1,
-            duration: 0.3,
-            ease,
-            transformOrigin: 'top center'
+            x: '0%',
+            duration: 0.35,
+            ease: 'power3.out',
           }
         );
       } else {
         gsap.to(menu, {
           opacity: 0,
-          y: 10,
-          scaleY: 1,
-          duration: 0.2,
-          ease,
-          transformOrigin: 'top center',
+          x: '100%',
+          duration: 0.25,
+          ease: 'power3.in',
           onComplete: () => {
             gsap.set(menu, { visibility: 'hidden' });
           }
@@ -291,6 +287,12 @@ const PillNav = ({
       </nav>
 
       <div className="mobile-menu-popover mobile-only" ref={mobileMenuRef} style={cssVars}>
+        {/* Drawer Header */}
+        <div className="mobile-drawer-header">
+          <span className="mobile-drawer-brand">TELAVI</span>
+          <span className="mobile-drawer-tagline">Magic Elixir</span>
+        </div>
+        <div className="mobile-drawer-divider" />
         <ul className="mobile-menu-list">
           {items.map((item, i) => (
             <li key={item.href || `mobile-item-${i}`}>

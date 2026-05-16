@@ -444,8 +444,9 @@ const Hero = ({ theme }) => {
           <p className="font-sans font-light text-base md:text-lg text-espresso/70 max-w-2xl mx-auto mb-2 leading-relaxed tracking-wide">
             Minuman bunga telang premium — <span className="text-crimson font-semibold">color-changing</span> — 100% bahan lokal.
           </p>
-          <p className="font-sans font-light text-sm text-espresso/45 max-w-xl mx-auto mb-14 leading-relaxed">
-            Berubah warna secara ajaib dari biru menjadi ungu ketika ditambahkan perasan jeruk.
+          <p className="font-sans font-light text-cream/80 text-lg md:text-2xl mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed">
+            Lebih dari sekadar minuman, TELAVI adalah pengalaman visual dan rasa. 
+            Menghadirkan keajaiban Bunga Telang dalam setiap tegukan.
           </p>
 
           <div className="flex flex-col md:flex-row gap-5 justify-center">
@@ -465,7 +466,7 @@ const Hero = ({ theme }) => {
 // ================= ABOUT SECTION — CLEAN & CONSISTENT =================
 const About = () => {
   return (
-    <section id="about" className="py-40 bg-cream relative overflow-hidden">
+    <section id="about" className="py-24 md:py-40 bg-cream relative overflow-hidden">
       <div className="container mx-auto px-8 relative z-10 max-w-6xl">
         <div className="text-center mb-24">
           <motion.p
@@ -843,63 +844,54 @@ const PremiumBottle = ({ magic }) => {
 
         {/* Highlight strip on bottle right */}
         <path
-          d="M 162,240 C 164,270 165,300 163,340"
-          stroke="rgba(255,255,255,0.08)"
-          strokeWidth="2"
-          fill="none"
-          strokeLinecap="round"
-        />
-
-        {/* Label area */}
-        <motion.ellipse
-          animate={{
-            cx: magic ? 100 : 100,
-            cy: magic ? 260 : 255,
-            fill: magic ? "rgba(123,63,160,0.25)" : "rgba(59,111,160,0.25)",
-          }}
-          transition={{ duration: 2, ease: customEase }}
-          rx="42" ry="50"
-          stroke="rgba(255,255,255,0.1)"
+          x="70" y="32" width="60" height="22" rx="6"
+          fill="url(#capGrad)"
+          stroke="rgba(255,255,255,0.2)"
           strokeWidth="1"
+          animate={{ opacity: [1, 0.85, 1] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
+        <line x1="76" y1="40" x2="124" y2="40" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
 
-        {/* Label text */}
-        <text
-          x="100" y="245"
-          textAnchor="middle"
-          fill="rgba(255,255,255,0.5)"
-          fontSize="11"
-          fontWeight="bold"
-          letterSpacing="4"
-          fontFamily="sans-serif"
-        >TELAVI</text>
-        <text
-          x="100" y="265"
-          textAnchor="middle"
-          fill="rgba(255,255,255,0.3)"
-          fontSize="7"
-          letterSpacing="3"
-          fontFamily="sans-serif"
-        >MAGIC ELIXIR</text>
+        {/* Label oval */}
+        <motion.ellipse
+          cx="100" cy="282"
+          animate={{ ry: magic ? 52 : 48, fill: magic ? "rgba(168,85,247,0.15)" : "rgba(59,130,246,0.12)" }}
+          transition={{ duration: 2 }}
+          rx="46"
+          stroke="rgba(255,255,255,0.12)" strokeWidth="1"
+        />
+        <ellipse cx="100" cy="282" rx="38" ry="40" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="0.8" />
 
-        {/* Rising bubbles inside liquid */}
+        <text x="100" y="272" textAnchor="middle" fill="rgba(255,255,255,0.7)" fontSize="10" fontWeight="700" letterSpacing="5" fontFamily="sans-serif">TELAVI</text>
+        <line x1="72" y1="278" x2="128" y2="278" stroke="rgba(255,255,255,0.15)" strokeWidth="0.6" />
+        <text x="100" y="292" textAnchor="middle" fill="rgba(255,255,255,0.4)" fontSize="6.5" letterSpacing="3.5" fontFamily="sans-serif">MAGIC ELIXIR</text>
+
+        {/* Decorative dots around label */}
+        {[0,60,120,180,240,300].map((angle, i) => (
+          <motion.circle key={i}
+            cx={100 + 54 * Math.cos((angle * Math.PI)/180)}
+            cy={282 + 54 * Math.sin((angle * Math.PI)/180)}
+            r={2.5}
+            fill={magic ? "rgba(192,132,252,0.5)" : "rgba(147,197,253,0.5)"}
+            animate={{ opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
+          />
+        ))}
+
+        {/* Rising bubbles */}
         {bubbles.map(b => (
           <motion.circle
-            key={b.id}
-            r={b.size / 2}
-            fill="rgba(255,255,255,0.25)"
-            initial={{ cy: 380, cx: 50 + b.x, opacity: 0 }}
-            animate={{
-              cy: 160,
-              cx: 50 + b.x + (Math.random() - 0.5) * 20,
-              opacity: [0, 0.5, 0],
-            }}
+            key={b.id} r={b.size / 2}
+            fill="rgba(255,255,255,0.2)"
+            initial={{ cy: 390, cx: 50 + b.x, opacity: 0 }}
+            animate={{ cy: 210, cx: 50 + b.x, opacity: [0, 0.6, 0] }}
             transition={{ duration: b.duration, ease: "easeOut" }}
           />
         ))}
 
         {/* Bottom reflection */}
-        <ellipse cx="100" cy="408" rx="60" ry="6" fill="rgba(255,255,255,0.06)" />
+        <ellipse cx="100" cy="412" rx="62" ry="5" fill="rgba(255,255,255,0.05)" />
       </svg>
 
       {/* Platform shadow */}
@@ -968,9 +960,9 @@ const ColorMagic = () => {
 
 const Products = () => {
   return (
-    <section id="products" className="py-40 bg-cream relative overflow-hidden">
-      <div className="container mx-auto px-8 relative z-10">
-        <ScrollReveal className="mb-32 flex flex-col md:flex-row md:items-end justify-between gap-16">
+    <section id="products" className="py-24 md:py-40 bg-cream relative overflow-hidden">
+      <div className="container mx-auto px-6 md:px-8 relative z-10">
+        <ScrollReveal className="mb-16 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-16">
           <div className="flex-1">
             <div className="w-12 h-0.5 bg-gold mb-8"></div>
             <h2 className="font-sans font-black text-5xl md:text-7xl text-espresso leading-[0.9] mb-4">Choose Your Vibe.</h2>
@@ -1209,7 +1201,7 @@ const TeamPhoto = ({ letter, avatar, index }) => {
 };
 
 const Team = () => (
-  <section id="team" className="py-40 bg-espresso text-cream relative overflow-hidden">
+  <section id="team" className="py-24 md:py-40 bg-espresso text-cream relative overflow-hidden">
     {/* Decorative subtle grid */}
     <div className="absolute inset-0" style={{
       backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(200,150,42,0.04) 1px, transparent 0)',
@@ -1241,7 +1233,7 @@ const Team = () => (
         </div>
       </ScrollReveal>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-5xl mx-auto mt-16">
         {brand.team.map((member, idx) => (
           <motion.div
             key={idx}
@@ -1320,8 +1312,8 @@ const Team = () => (
 );
 
 const Footer = () => (
-  <footer id="footer" className="bg-espresso text-cream pt-40 pb-12 text-center relative overflow-hidden">
-    <div className="container mx-auto px-8 relative z-10">
+  <footer id="footer" className="bg-espresso text-cream pt-24 md:pt-40 pb-12 text-center relative overflow-hidden">
+    <div className="container mx-auto px-6 md:px-8 relative z-10">
       <ScrollReveal>
         <h2 className="font-sans font-black text-5xl md:text-8xl text-cream mb-12 md:mb-20 leading-[0.9]">Let's Talk</h2>
 
@@ -1390,7 +1382,7 @@ export default function App() {
   };
 
   return (
-    <div className={theme === 'dark' ? 'theme-dark' : 'theme-light'}>
+    <div className={`${theme === 'dark' ? 'theme-dark' : 'theme-light'} overflow-x-hidden w-full relative`}>
       {/* Global UI Enhancements */}
       <ScrollProgressBar />
 
