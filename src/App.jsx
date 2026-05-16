@@ -15,7 +15,7 @@ const ScrollProgressBar = () => {
   return (
     <motion.div
       style={{ scaleX, originX: 0 }}
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold via-crimson to-magic z-[200] shadow-[0_0_20px_rgba(200,150,42,0.6)]"
+      className="fixed top-0 left-0 right-0 h-[2px] bg-gold z-[200]"
     />
   );
 };
@@ -321,10 +321,10 @@ const CountUp = ({ to, suffix = "", title }) => {
   }, [to]);
 
   return (
-    <div className="flex flex-col items-center group">
-      <div className="font-serif font-black text-6xl md:text-8xl text-gold drop-shadow-[0_0_15px_rgba(200,150,42,0.3)] transition-all duration-500 group-hover:scale-110 group-hover:text-cream">{value}{suffix}</div>
-      <div className="font-sans text-cream/60 uppercase tracking-[0.2em] text-xs mt-4 font-bold">{title}</div>
-    </div>
+    <ScrollReveal>
+      <div className="font-serif font-black text-6xl md:text-8xl text-gold mb-2">{value}{suffix}</div>
+      <div className="text-[10px] md:text-xs tracking-[0.25em] uppercase text-cream/60 font-bold">{title}</div>
+    </ScrollReveal>
   );
 };
 
@@ -449,7 +449,7 @@ const Hero = ({ theme }) => {
           </p>
 
           <div className="flex flex-col md:flex-row gap-5 justify-center">
-            <MagneticButton href="#products" className="bg-crimson text-cream px-12 py-5 rounded-lg uppercase tracking-[0.15em] text-xs font-bold hover:bg-crimson/90 transition-all duration-300 shadow-[0_4px_20px_rgba(192,57,43,0.3)]">
+            <MagneticButton href="#products" className="bg-crimson text-cream px-12 py-5 rounded-lg uppercase tracking-[0.15em] text-xs font-bold hover:bg-crimson/90 transition-all duration-300">
               Lihat Varian
             </MagneticButton>
             <MagneticButton href="#about" className="border border-espresso/30 text-espresso px-12 py-5 rounded-lg uppercase tracking-[0.15em] text-xs font-bold hover:border-espresso/60 transition-all duration-300">
@@ -525,7 +525,11 @@ const About = () => {
             >
               <div>
                 <p className="font-sans text-3xl font-black text-crimson tracking-tight">100%</p>
-                <p className="font-sans text-[9px] tracking-[0.2em] uppercase font-bold text-espresso/35 mt-1">Natural</p>
+                <p className="text-[10px] tracking-[0.2em] uppercase text-espresso/50 font-bold mt-1">Bahan Alami</p>
+              </div>
+              <div>
+                <p className="font-sans text-3xl font-black text-gold tracking-tight">0%</p>
+                <p className="text-[10px] tracking-[0.2em] uppercase text-espresso/50 font-bold mt-1">Pengawet Buatan</p>
               </div>
               <div>
                 <p className="font-sans text-3xl font-black text-crimson tracking-tight">4</p>
@@ -947,7 +951,7 @@ const ColorMagic = () => {
             <p className="font-sans font-light text-cream/60 text-xl mb-12 leading-relaxed max-w-lg">
               Warna TELAVI berasal dari <em>antosianin</em> alami. Ketika pH berubah karena sentuhan asam sitrat (jeruk), struktur molekulnya bereaksi dan warnanya bertransformasi seketika.
             </p>
-            <MagneticButton onClick={() => setMagic(true)} className="border border-gold text-gold px-10 py-5 rounded-full uppercase tracking-widest text-xs font-bold hover:bg-gold hover:text-espresso transition-all duration-700 shadow-[0_0_20px_rgba(200,150,42,0.2)]">
+            <MagneticButton onClick={() => setMagic(true)} className="border border-gold text-gold px-10 py-5 rounded-full uppercase tracking-widest text-xs font-bold hover:bg-gold hover:text-espresso transition-all duration-700">
               {magic ? "✨ Keajaiban Terjadi" : "Trigger The Magic"}
             </MagneticButton>
           </ScrollReveal>
@@ -1162,32 +1166,40 @@ const WhyTelavi = () => {
 
 // ================= PREMIUM TEAM CARD =================
 const TeamPhoto = ({ letter, avatar, index }) => {
-  const hue = [15, 210, 290]; // warm gold, blue, purple tones
   return (
-    <div className="relative">
+    <div className="relative flex justify-center items-center">
+      {/* Subtle ambient shadow */}
+      <motion.div
+        animate={{ scale: [1, 1.05, 1], opacity: [0.05, 0.15, 0.05] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.3 }}
+        className="absolute w-32 h-32 rounded-full blur-2xl -z-10 bg-gold"
+      />
+      
       <motion.div
         initial={{ scale: 0, rotate: -30 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ duration: 0.6, delay: index * 0.15, ease: customEase }}
-        className="w-28 h-28 rounded-full flex items-center justify-center relative overflow-hidden group"
+        className="w-28 h-28 rounded-full flex items-center justify-center relative overflow-hidden group shadow-xl backdrop-blur-md"
         style={{
-          background: `linear-gradient(135deg, rgba(200,150,42,0.3), rgba(${hue[index]},100,160,0.3))`,
-          boxShadow: '0 0 40px rgba(200,150,42,0.15)',
+          background: 'rgba(255, 255, 255, 0.02)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: 'inset 0 4px 20px rgba(255, 255, 255, 0.05)',
         }}
       >
-        {/* Glow ring */}
+        {/* Elegant shimmer reflection */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 rounded-full"
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -inset-10 opacity-30 mix-blend-overlay pointer-events-none"
           style={{
-            background: `conic-gradient(from 0deg, transparent, rgba(200,150,42,0.2), transparent 60%, rgba(${hue[index]},130,200,0.15))`,
+            background: 'conic-gradient(from 0deg, transparent 0%, rgba(200, 150, 42, 0.1) 20%, transparent 40%, transparent 60%, rgba(200, 150, 42, 0.1) 80%, transparent 100%)',
           }}
         />
+
         {avatar ? (
-          <img src={avatar} alt="Team Avatar" className="relative z-10 w-24 h-24 object-contain drop-shadow-[0_5px_15px_rgba(0,0,0,0.25)] group-hover:scale-110 group-hover:rotate-6 transition-all duration-500" />
+          <img src={avatar} alt="Team Avatar" className="relative z-10 w-[90px] h-[90px] object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500" />
         ) : (
-          <span className="relative z-10 text-4xl font-serif font-black text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+          <span className="relative z-10 text-4xl font-serif font-black text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
             {letter}
           </span>
         )}
