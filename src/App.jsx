@@ -178,9 +178,9 @@ const brand = {
     { name: "Telavi Milk Tea", desc: "Telang + Teh + Susu Kental Manis", vibe: "Manis & Kekinian", color: "from-[#7B3FA0] to-[#3f1f54]", shadow: "shadow-[#7B3FA0]/40", price: "Rp 17.000", image: "/TELAVI  MILK TEASODA.png" },
   ],
   team: [
-    { name: "Rendy Agus D. S.", role: "Ketua / R&D", nim: "25051204348", photo: "R", avatar: "profil kelompok/adventurer-1778953439396.svg" },
-    { name: "Annas Ridho Sadila", role: "Anggota 1 / Marketing", nim: "25051204368", photo: "A", avatar: "profil kelompok/adventurer-1778953446499.svg" },
-    { name: "Fakhrur Rohman S.", role: "Anggota 2 / Keuangan", nim: "25051204373", photo: "F", avatar: "profil kelompok/adventurer-1778953449502.svg" }
+    { name: "Rendy Agus D. S.", role: "Ketua / R&D", nim: "25051204348", photo: "R", avatar: "/profil kelompok/adventurer-1778953439396.svg" },
+    { name: "Annas Ridho Sadila", role: "Anggota 1 / Marketing", nim: "25051204368", photo: "A", avatar: "/profil kelompok/adventurer-1778953446499.svg" },
+    { name: "Fakhrur Rohman S.", role: "Anggota 2 / Keuangan", nim: "25051204373", photo: "F", avatar: "/profil kelompok/adventurer-1778953449502.svg" }
   ]
 };
 
